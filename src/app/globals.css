@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+:root {
+  /* ═══════════════════════════════════════════════
+     ARCANE GLASSMORPHISM — Design Token System
+     ═══════════════════════════════════════════════ */
+
+  /* Surface / Background */
+  --color-surface: #0f131d;
+  --color-surface-dim: #0a0e18;
+  --color-surface-bright: #353944;
+  --color-surface-container-lowest: #070a12;
+  --color-surface-container-low: #111520;
+  --color-surface-container: #171b27;
+  --color-surface-container-high: #1e2230;
+  --color-surface-container-highest: #282d3c;
+
+  --color-on-surface: #e2e5f3;
+  --color-on-surface-variant: #a8aab8;
+  --color-inverse-surface: #e2e5f3;
+  --color-inverse-on-surface: #2c303b;
+
+  --color-outline: #494d5c;
+  --color-outline-variant: #363a48;
+  --color-surface-tint: #ffb95f;
+
+  /* Arcane Gold — Primary */
+  --color-primary: #ffc174;
+  --color-primary-hover: #ffd49e;
+  --color-primary-dim: #c68a3c;
+  --color-on-primary: #472a00;
+  --color-primary-container: #f59e0b;
+  --color-on-primary-container: #613b00;
+  --color-inverse-primary: #855300;
+
+  /* Mystic Violet — Secondary */
+  --color-secondary: #c9b8ff;
+  --color-secondary-hover: #ddd0ff;
+  --color-on-secondary: #3c0091;
+  --color-secondary-container: #4a1fb0;
+  --color-on-secondary-container: #c4abff;
+
+  /* Emerald — Tertiary / Success */
+  --color-tertiary: #56e5a9;
+  --color-on-tertiary: #003824;
+  --color-tertiary-container: #30c88f;
+  --color-on-tertiary-container: #004e34;
+
+  /* Crimson — Error / Danger */
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* Background */
+  --color-background: #080c14;
+  --color-on-background: #e2e5f3;
+
+  /* Glass properties */
+  --glass-bg: rgba(15, 19, 29, 0.55);
+  --glass-bg-hover: rgba(20, 25, 38, 0.65);
+  --glass-border: rgba(160, 142, 122, 0.12);
+  --glass-border-hover: rgba(245, 158, 11, 0.2);
+  --glass-blur: 20px;
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+
+  /* Sidebar */
+  --sidebar-width: 72px;
+  --sidebar-width-expanded: 240px;
+  --topbar-height: 56px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-on-background);
+
+  --color-surface: var(--color-surface);
+  --color-surface-dim: var(--color-surface-dim);
+  --color-surface-container-lowest: var(--color-surface-container-lowest);
+  --color-surface-container-low: var(--color-surface-container-low);
+  --color-surface-container: var(--color-surface-container);
+  --color-surface-container-high: var(--color-surface-container-high);
+  --color-surface-container-highest: var(--color-surface-container-highest);
+  --color-on-surface: var(--color-on-surface);
+  --color-on-surface-variant: var(--color-on-surface-variant);
+  --color-outline: var(--color-outline);
+  --color-outline-variant: var(--color-outline-variant);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-dim: var(--color-primary-dim);
+  --color-on-primary: var(--color-on-primary);
+  --color-primary-container: var(--color-primary-container);
+  --color-on-primary-container: var(--color-on-primary-container);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-hover: var(--color-secondary-hover);
+  --color-secondary-container: var(--color-secondary-container);
+  --color-tertiary: var(--color-tertiary);
+  --color-tertiary-container: var(--color-tertiary-container);
+  --color-error: var(--color-error);
+  --color-error-container: var(--color-error-container);
+
+  --font-serif: "Noto Serif", serif;
+  --font-sans: "Outfit", sans-serif;
+  --font-mono: "Space Grotesk", monospace;
+}
+
+/* ═══════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════ */
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Ambient background gradients */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 20%, rgba(74, 31, 176, 0.15), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 80%, rgba(120, 40, 200, 0.1), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 10%, rgba(245, 158, 11, 0.05), transparent 50%);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════
+   GLASS PANELS
+   ═══════════════════════════════════════════════ */
+.arcane-glass {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.arcane-glass-hover {
+  transition: all var(--transition-normal);
+}
+
+.arcane-glass-hover:hover {
+  background-color: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow), 0 0 20px -4px rgba(245, 158, 11, 0.08);
+}
+
+.arcane-glass-active {
+  background-color: rgba(30, 41, 59, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  box-shadow: var(--glass-shadow), 0 0 24px -4px rgba(245, 158, 11, 0.12);
+}
+
+/* ═══════════════════════════════════════════════
+   GLOW EFFECTS
+   ═══════════════════════════════════════════════ */
+.arcane-text-glow {
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+}
+
+.arcane-text-glow-emerald {
+  text-shadow: 0 0 12px rgba(86, 229, 169, 0.5);
+}
+
+.arcane-text-glow-crimson {
+  text-shadow: 0 0 12px rgba(255, 180, 171, 0.5);
+}
+
+.arcane-icon-glow {
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.4));
+}
+
+/* ═══════════════════════════════════════════════
+   CUSTOM SCROLLBAR
+   ═══════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-outline-variant) transparent;
+}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(245, 158, 11, 0.15); }
+  50% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in { animation: fadeIn 0.4s ease-out both; }
+.animate-slide-in-left { animation: slideInLeft 0.35s ease-out both; }
+.animate-slide-in-up { animation: slideInUp 0.35s ease-out both; }
+.animate-slide-in-down { animation: slideInDown 0.3s ease-out both; }
+.animate-pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+/* Stagger children */
+.stagger-children > * {
+  animation: slideInUp 0.35s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
